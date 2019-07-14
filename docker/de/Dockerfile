@@ -4,12 +4,13 @@ RUN apk --no-cache add ca-certificates postgresql
 VOLUME /var/lib/postgresql/data
 VOLUME /var/log/chain
 
+COPY corectl ./cmd/corectl
+COPY cored ./cmd/cored
+COPY startup.sh ./docker/de/startup.sh
+
 # COPY corectl /usr/bin/chain/corectl
-COPY corectl /cmd/corectl
 # COPY cored /usr/bin/chain/cored
-COPY cored /cmd/cored
 # COPY startup.sh /usr/bin/chain/startup.sh
-COPY startup.sh /docker/de/startup.sh
 
 ENV DATABASE_URL=postgres://postgres:@localhost/core?sslmode=disable
 ENV LOGFILE=/var/log/chain/cored.log
